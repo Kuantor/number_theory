@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "Cython>=3.0.11"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "number_theory"
+version = "0.1.0"
+description = "Lightweight, dependency-free number theory with a compiled (source-less) core."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Kuantor" }]
+keywords = ["number theory", "gcd", "lcm", "euclidean", "cython"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+
+[project.scripts]
+number-theory = "number_theory.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/Kuantor/number_theory"
+Issues = "https://github.com/Kuantor/number_theory/issues"
+
+[tool.setuptools.packages.find]
+include = ["number_theory*"]
+
+[tool.setuptools.package-data]
+number_theory = ["py.typed", "*.pyi"]
+
+# Belt-and-suspenders: never ship generated C or Cython source in the wheel.
+[tool.setuptools.exclude-package-data]
+number_theory = ["*.c", "*.pyx"]
