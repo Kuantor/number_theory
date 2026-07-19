@@ -1,5 +1,7 @@
 # number_theory
 
+[![CI](https://github.com/Kuantor/number_theory/actions/workflows/ci.yml/badge.svg)](https://github.com/Kuantor/number_theory/actions/workflows/ci.yml)
+
 Lightweight, **dependency-free** Python number-theory library whose core is
 compiled to a **source-less binary** (Cython → `.pyd` / `.so`), so it can be
 shipped and used without distributing the algorithm source.
