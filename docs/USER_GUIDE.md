@@ -148,12 +148,40 @@ cd ~
 python -c "import number_theory as nt; print(nt.gcd(12, 18))"
 ```
 
-**`number-theory` is not recognized as a command**
-The Scripts directory of your Python/venv isn't on `PATH`. Either activate your
-virtual environment, or run the module form instead:
+**`'number-theory' is not recognized as an internal or external command`**
+The install worked — `pip` just placed the `number-theory.exe` launcher in your
+Python's `Scripts` folder, which isn't on your `PATH`. Three ways to deal with it:
+
+*Option A — run the module form (no PATH change needed):*
 ```powershell
 python -m number_theory gcd 12 18
 ```
+
+*Option B — call the launcher by its full path.* Find the folder with:
+```powershell
+python -c "import sysconfig; print(sysconfig.get_path('scripts'))"
+```
+then run e.g. `& "<that folder>\number-theory.exe" --version`.
+
+*Option C — add that folder to your user `PATH` permanently (PowerShell):*
+```powershell
+$scripts = python -c "import sysconfig; print(sysconfig.get_path('scripts'))"
+$u = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($u -notlike "*$scripts*") {
+    [Environment]::SetEnvironmentVariable("Path", "$u;$scripts", "User")
+    "Added - open a NEW terminal for it to take effect."
+} else { "Already on PATH." }
+```
+Then open a **new** terminal and `number-theory --version` will work.
+
+> Avoid the naive `setx PATH "%PATH%;..."` in `cmd`: `setx` truncates `PATH` at
+> 1024 characters and folds your combined system+user `PATH` into the user
+> variable, which can corrupt it. The PowerShell snippet above edits only the
+> user scope and is safe.
+
+If you're working inside a **virtual environment**, activating it
+(`.\.venv\Scripts\Activate.ps1`) already puts the launcher on `PATH` — no manual
+step needed.
 
 **`pip` says the wheel is "not a supported wheel on this platform"**
 The release wheel is for Windows x64 + Python 3.14 only. On a different platform
