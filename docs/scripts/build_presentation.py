@@ -43,10 +43,10 @@ def slide(bg=BG):
     return s
 
 
-def rect(s, l, t, w, h, fill=PANEL, line=None, lw=1.25, rad=0.055, rounded=True):
+def rect(s, lx, t, w, h, fill=PANEL, line=None, lw=1.25, rad=0.055, rounded=True):
     shp = s.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE,
-        Inches(l), Inches(t), Inches(w), Inches(h))
+        Inches(lx), Inches(t), Inches(w), Inches(h))
     if rounded:
         try:
             shp.adjustments[0] = rad
@@ -66,8 +66,8 @@ def rect(s, l, t, w, h, fill=PANEL, line=None, lw=1.25, rad=0.055, rounded=True)
     return shp
 
 
-def tb(s, l, t, w, h, anchor=MSO_ANCHOR.TOP):
-    box = s.shapes.add_textbox(Inches(l), Inches(t), Inches(w), Inches(h))
+def tb(s, lx, t, w, h, anchor=MSO_ANCHOR.TOP):
+    box = s.shapes.add_textbox(Inches(lx), Inches(t), Inches(w), Inches(h))
     tf = box.text_frame
     tf.word_wrap = True
     tf.vertical_anchor = anchor
@@ -105,7 +105,7 @@ def bullet(tf, text, size=15, color=WHITE, bcolor=GOLD, bold=False, first=False,
            gap=9, sub=False, glyph=None):
     p = para(tf, first=first, gap=gap, ls=1.04)
     g = glyph if glyph else ("–  " if sub else "•  ")
-    rb = run(p, g, size, bcolor, bold=True)
+    run(p, g, size, bcolor, bold=True)
     run(p, text, size, color, bold=bold)
     return p
 
@@ -129,23 +129,23 @@ def footer(s, n):
     run(p2, str(n), 10, DIM, name=MONO)
 
 
-def codecard(s, l, t, w, h, lines, title=None, size=13.5):
-    rect(s, l, t, w, h, fill=CODEBG, line=RGBColor(0x24, 0x3A, 0x50), lw=1.0)
+def codecard(s, lx, t, w, h, lines, title=None, size=13.5):
+    rect(s, lx, t, w, h, fill=CODEBG, line=RGBColor(0x24, 0x3A, 0x50), lw=1.0)
     yoff = 0.12
     if title:
-        tf = tb(s, l + 0.22, t + 0.12, w - 0.4, 0.4)
+        tf = tb(s, lx + 0.22, t + 0.12, w - 0.4, 0.4)
         p = para(tf, first=True, gap=0)
         run(p, title, 12, GOLD, bold=True, name=MONO)
         yoff = 0.6
-    tf = tb(s, l + 0.24, t + yoff, w - 0.45, h - yoff - 0.1)
+    tf = tb(s, lx + 0.24, t + yoff, w - 0.45, h - yoff - 0.1)
     for i, (txt, col) in enumerate(lines):
         p = para(tf, first=(i == 0), gap=4, ls=1.15)
         run(p, txt, size, col, name=MONO)
 
 
-def stat(s, l, t, w, h, big, label, bigc=GOLD):
-    rect(s, l, t, w, h, fill=PANEL, line=RGBColor(0x27, 0x3D, 0x54), lw=1.0)
-    tf = tb(s, l + 0.1, t + 0.14, w - 0.2, h - 0.2, anchor=MSO_ANCHOR.MIDDLE)
+def stat(s, lx, t, w, h, big, label, bigc=GOLD):
+    rect(s, lx, t, w, h, fill=PANEL, line=RGBColor(0x27, 0x3D, 0x54), lw=1.0)
+    tf = tb(s, lx + 0.1, t + 0.14, w - 0.2, h - 0.2, anchor=MSO_ANCHOR.MIDDLE)
     p = para(tf, first=True, gap=2)
     run(p, big, 30, bigc, bold=True, name=SANS)
     p2 = para(tf, gap=0)

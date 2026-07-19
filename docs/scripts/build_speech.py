@@ -2,7 +2,6 @@
 import sys
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches
-from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 OUT = sys.argv[1]
 
@@ -17,8 +16,6 @@ normal = doc.styles["Normal"]
 normal.font.name = "Calibri"
 normal.font.size = Pt(12)
 normal.font.color.rgb = BLACK
-for m in (doc.sections[0].left_margin, doc.sections[0].right_margin):
-    pass
 doc.sections[0].left_margin = Inches(1.0)
 doc.sections[0].right_margin = Inches(1.0)
 doc.sections[0].top_margin = Inches(0.9)
