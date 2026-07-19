@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; background: #0E1B2A; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"
+     font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <pattern id="dots" width="46" height="46" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#2A4C66" opacity="0.35"/>
+    </pattern>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#D9B13C" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#D9B13C" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#D9B13C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="75%">
+      <stop offset="60%" stop-color="#0E1B2A" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#05070C" stop-opacity="0.85"/>
+    </radialGradient>
+    <linearGradient id="coreFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B3149"/>
+      <stop offset="100%" stop-color="#0F2133"/>
+    </linearGradient>
+    <linearGradient id="tileBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82BC"/>
+      <stop offset="100%" stop-color="#255A86"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#D9B13C"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="1920" height="1080" fill="#0E1B2A"/>
+  <rect width="1920" height="1080" fill="url(#dots)"/>
+  <!-- faint circuit traces -->
+  <g stroke="#2E5170" stroke-width="1.5" fill="none" opacity="0.30">
+    <path d="M0,120 H360 L420,180 H620"/>
+    <path d="M1920,980 H1500 L1440,920 H1180"/>
+    <path d="M120,980 H300 L340,940"/>
+    <circle cx="620" cy="180" r="4" fill="#2E5170" stroke="none"/>
+    <circle cx="1180" cy="920" r="4" fill="#2E5170" stroke="none"/>
+  </g>
+
+  <!-- ===================== CONSTELLATION (right) ===================== -->
+  <g>
+    <!-- glow behind core -->
+    <circle cx="1300" cy="540" r="360" fill="url(#coreGlow)"/>
+
+    <!-- connectors: solid to the implemented module (gcd), dashed to roadmap -->
+    <g stroke="#D9B13C" fill="none" opacity="0.55">
+      <line x1="1300" y1="540" x2="1600" y2="700" stroke-width="2.5" opacity="0.9"/>
+      <line x1="1300" y1="540" x2="1300" y2="235" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <line x1="1300" y1="540" x2="1600" y2="390" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <line x1="1300" y1="540" x2="1300" y2="860" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <line x1="1300" y1="540" x2="1000" y2="700" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <line x1="1300" y1="540" x2="1000" y2="390" stroke-width="1.4" stroke-dasharray="3 7"/>
+    </g>
+
+    <!-- ---------- CORE: the compiled source-less binary ---------- -->
+    <g>
+      <rect x="1205" y="445" width="190" height="190" rx="24" fill="url(#coreFill)"
+            stroke="#D9B13C" stroke-width="2.6" filter="url(#glow)"/>
+      <!-- inner lattice -->
+      <g stroke="#3E688C" stroke-width="1" opacity="0.5">
+        <line x1="1205" y1="493" x2="1395" y2="493"/>
+        <line x1="1205" y1="540" x2="1395" y2="540"/>
+        <line x1="1205" y1="587" x2="1395" y2="587"/>
+        <line x1="1253" y1="445" x2="1253" y2="635"/>
+        <line x1="1300" y1="445" x2="1300" y2="635"/>
+        <line x1="1347" y1="445" x2="1347" y2="635"/>
+      </g>
+      <!-- chip pins -->
+      <g fill="#D9B13C">
+        <rect x="1225" y="437" width="10" height="10"/><rect x="1275" y="437" width="10" height="10"/>
+        <rect x="1325" y="437" width="10" height="10"/><rect x="1365" y="437" width="10" height="10"/>
+        <rect x="1225" y="633" width="10" height="10"/><rect x="1275" y="633" width="10" height="10"/>
+        <rect x="1325" y="633" width="10" height="10"/><rect x="1365" y="633" width="10" height="10"/>
+      </g>
+      <text x="1300" y="533" text-anchor="middle" font-family="Consolas,monospace"
+            font-size="30" fill="#6FA8D0" opacity="0.65" letter-spacing="3">10</text>
+      <text x="1300" y="567" text-anchor="middle" font-family="Consolas,monospace"
+            font-size="30" fill="#6FA8D0" opacity="0.65" letter-spacing="3">01</text>
+      <text x="1300" y="688" text-anchor="middle" font-family="Consolas,monospace"
+            font-size="21" fill="#D9B13C" letter-spacing="1">compiled .pyd</text>
+    </g>
+
+    <!-- ---------- SIEVE (top) — projected #4 ---------- -->
+    <g transform="translate(1300,235)" font-family="Consolas,monospace">
+      <g stroke="#D9B13C" stroke-width="1.4" fill="none" opacity="0.9">
+        <path d="M-95,-42 L95,-42 L75,38 L-75,38 Z"/>
+        <line x1="-83" y1="-14" x2="83" y2="-14"/>
+        <line x1="-79" y1="12"  x2="79"  y2="12"/>
+        <line x1="-55" y1="-42" x2="-63" y2="38"/>
+        <line x1="0"   y1="-42" x2="0"   y2="38"/>
+        <line x1="55"  y1="-42" x2="63"  y2="38"/>
+      </g>
+      <!-- primes caught on the mesh -->
+      <g fill="#D9B13C" filter="url(#glow)">
+        <circle cx="-60" cy="-27" r="4.5"/><circle cx="-8" cy="0" r="4.5"/>
+        <circle cx="60" cy="-27" r="4.5"/><circle cx="40" cy="24" r="4.5"/>
+      </g>
+      <!-- composites falling through -->
+      <g fill="#4A6076" opacity="0.7">
+        <circle cx="-20" cy="60" r="3.5"/><circle cx="18" cy="72" r="3.5"/>
+        <circle cx="-45" cy="80" r="3"/><circle cx="52" cy="66" r="3"/>
+      </g>
+      <text x="0" y="-60" text-anchor="middle" font-size="20" fill="#9FB4C6">sieve</text>
+    </g>
+
+    <!-- ---------- PRIMALITY (2 o'clock) — projected #3 ---------- -->
+    <g transform="translate(1600,390)" font-family="Consolas,monospace">
+      <polygon points="0,-56 48,-28 48,28 0,56 -48,28 -48,-28"
+               fill="none" stroke="#D9B13C" stroke-width="1.6"/>
+      <polygon points="0,-34 30,-17 30,17 0,34 -30,17 -30,-17"
+               fill="#D9B13C" opacity="0.10" stroke="#D9B13C" stroke-width="1"/>
+      <text x="0" y="12" text-anchor="middle" font-size="40" font-weight="700"
+            fill="#F0E4C0">17</text>
+      <!-- arrows glancing off (indivisible) -->
+      <g stroke="#D9B13C" stroke-width="2" marker-end="url(#arrow)" opacity="0.85">
+        <path d="M-96,-6 L-58,-6"/>
+        <path d="M96,6 L58,6"/>
+      </g>
+      <text x="0" y="86" text-anchor="middle" font-size="20" fill="#9FB4C6">is_prime</text>
+    </g>
+
+    <!-- ---------- GCD / LCM (4 o'clock) — IMPLEMENTED #2 ---------- -->
+    <g transform="translate(1600,700)" font-family="Consolas,monospace">
+      <!-- Euclidean tiling, solid & lit -->
+      <g stroke="#0E1B2A" stroke-width="2">
+        <rect x="-120" y="-78" width="120" height="120" fill="url(#tileBlue)"/>
+        <rect x="0"   y="-78" width="78"  height="78"  fill="url(#tileBlue)"/>
+        <rect x="0"   y="0"   width="46"  height="46"  fill="#4C8CC0"/>
+        <rect x="46"  y="0"   width="46"  height="46"  fill="#4C8CC0"/>
+        <rect x="0"   y="46"  width="46"  height="46"  fill="#3B82BC"/>
+        <!-- gcd = smallest square, gold -->
+        <rect x="46" y="46" width="46" height="46" fill="#D9B13C" filter="url(#glow)"/>
+      </g>
+      <text x="46" y="118" text-anchor="middle" font-size="20" fill="#D9B13C">gcd &#183; lcm</text>
+    </g>
+
+    <!-- ---------- MODULAR ARITHMETIC (6 o'clock) — projected #7 ---------- -->
+    <g transform="translate(1300,860)" font-family="Consolas,monospace">
+      <circle cx="0" cy="0" r="56" fill="none" stroke="#D9B13C" stroke-width="1.6"/>
+      <g stroke="#D9B13C" stroke-width="1.6" opacity="0.7">
+        <line x1="0" y1="-56" x2="0" y2="-46"/><line x1="56" y1="0" x2="46" y2="0"/>
+        <line x1="0" y1="56" x2="0" y2="46"/><line x1="-56" y1="0" x2="-46" y2="0"/>
+        <line x1="40" y1="-40" x2="33" y2="-33"/><line x1="40" y1="40" x2="33" y2="33"/>
+        <line x1="-40" y1="40" x2="-33" y2="33"/><line x1="-40" y1="-40" x2="-33" y2="-33"/>
+      </g>
+      <!-- wrap-around arrow -->
+      <path d="M0,-38 A38,38 0 1 1 -30,24" fill="none" stroke="#D9B13C" stroke-width="2.4"
+            marker-end="url(#arrow)"/>
+      <text x="0" y="8" text-anchor="middle" font-size="22" fill="#F0E4C0">mod</text>
+      <text x="0" y="86" text-anchor="middle" font-size="20" fill="#9FB4C6">mod n</text>
+    </g>
+
+    <!-- ---------- EULER TOTIENT (8 o'clock) — projected #6 ---------- -->
+    <g transform="translate(1000,700)" font-family="Consolas,monospace">
+      <circle cx="0" cy="0" r="56" fill="none" stroke="#D9B13C" stroke-width="1.4" opacity="0.8"/>
+      <!-- residues: coprime ones lit gold, others dim -->
+      <g>
+        <circle cx="0" cy="-56" r="5" fill="#D9B13C" filter="url(#glow)"/>
+        <circle cx="40" cy="-40" r="4" fill="#4A6076"/>
+        <circle cx="56" cy="0" r="5" fill="#D9B13C" filter="url(#glow)"/>
+        <circle cx="40" cy="40" r="4" fill="#4A6076"/>
+        <circle cx="0" cy="56" r="4" fill="#4A6076"/>
+        <circle cx="-40" cy="40" r="5" fill="#D9B13C" filter="url(#glow)"/>
+        <circle cx="-56" cy="0" r="4" fill="#4A6076"/>
+        <circle cx="-40" cy="-40" r="5" fill="#D9B13C" filter="url(#glow)"/>
+      </g>
+      <text x="0" y="16" text-anchor="middle" font-family="'Segoe UI',serif"
+            font-size="46" fill="#F0E4C0">&#966;</text>
+      <text x="0" y="86" text-anchor="middle" font-size="20" fill="#9FB4C6">totient</text>
+    </g>
+
+    <!-- ---------- FACTORIZATION (10 o'clock) — projected #5 ---------- -->
+    <g transform="translate(1000,390)" font-family="Consolas,monospace">
+      <text x="0" y="-40" text-anchor="middle" font-size="34" font-weight="700" fill="#F0E4C0">60</text>
+      <g stroke="#D9B13C" stroke-width="1.5" opacity="0.8">
+        <path d="M-4,-30 L-54,4"/><path d="M-1,-30 L-18,4"/>
+        <path d="M1,-30 L18,4"/><path d="M4,-30 L54,4"/>
+      </g>
+      <g fill="none" stroke="#D9B13C" stroke-width="1.5" font-size="22">
+        <rect x="-70" y="8" width="32" height="34" rx="5"/>
+        <rect x="-34" y="8" width="32" height="34" rx="5"/>
+        <rect x="2"   y="8" width="32" height="34" rx="5"/>
+        <rect x="38"  y="8" width="32" height="34" rx="5"/>
+      </g>
+      <g fill="#F0E4C0" font-size="22" text-anchor="middle">
+        <text x="-54" y="33">2</text><text x="-18" y="33">2</text>
+        <text x="18" y="33">3</text><text x="54" y="33">5</text>
+      </g>
+      <text x="0" y="80" text-anchor="middle" font-size="20" fill="#9FB4C6">factorize</text>
+    </g>
+  </g>
+
+  <!-- ===================== TITLE BLOCK (left) ===================== -->
+  <g>
+    <text x="126" y="304" font-family="Consolas,monospace" font-size="22"
+          letter-spacing="6" fill="#D9B13C" opacity="0.85">COMPILED &#183; PYTHON &#183; NUMBER THEORY</text>
+
+    <text x="120" y="470" font-family="Consolas,monospace" font-size="94" font-weight="700">
+      <tspan fill="#E8F0F7">number_</tspan><tspan fill="#D9B13C">theory</tspan>
+    </text>
+    <rect x="126" y="492" width="486" height="5" rx="2.5" fill="#D9B13C"/>
+
+    <text x="128" y="560" font-size="34" fill="#A9BED0">A source-less compiled toolkit</text>
+    <text x="128" y="606" font-size="34" fill="#A9BED0">for number theory.</text>
+
+    <text x="128" y="686" font-family="Consolas,monospace" font-size="25" fill="#D9B13C">
+      gcd &#183; lcm &#8212; shipping now
+    </text>
+    <text x="128" y="722" font-family="Consolas,monospace" font-size="23" fill="#7A93A8">
+      primes &#183; factorization &#183; &#966; &#183; mod &#8212; on the roadmap
+    </text>
+
+    <rect x="128" y="762" width="132" height="44" rx="22" fill="none" stroke="#D9B13C" stroke-width="1.6"/>
+    <text x="194" y="791" text-anchor="middle" font-family="Consolas,monospace" font-size="22"
+          fill="#D9B13C">v0.1.0</text>
+  </g>
+
+  <!-- vignette on top -->
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+</svg>
+</body>
+</html>
