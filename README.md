@@ -8,6 +8,9 @@ shipped and used without distributing the algorithm source.
 > so far. See the [roadmap board](https://github.com/orgs/Kuantor/projects/10)
 > for what's next (primality, factorization, totient, modular arithmetic, …).
 
+📖 **New here? Read the [User Guide](docs/USER_GUIDE.md)** — install, CLI + Python
+usage, and troubleshooting.
+
 ## Install
 
 From a built wheel (contains the compiled binary only — no source for the core):
