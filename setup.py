@@ -7,8 +7,18 @@ out of the wheel.
 from setuptools import Extension, setup
 from Cython.Build import cythonize
 
+# Build against CPython's stable ABI (limited API), 3.11+, so a single
+# `*-abi3-*` wheel works on 3.11, 3.12, 3.13, 3.14, ... instead of one wheel
+# per Python version. The matching wheel tag is set in setup.cfg.
+LIMITED_API_VERSION = "0x030B0000"  # CPython 3.11
+
 extensions = [
-    Extension("number_theory._core", ["number_theory/_core.pyx"]),
+    Extension(
+        "number_theory._core",
+        ["number_theory/_core.pyx"],
+        define_macros=[("Py_LIMITED_API", LIMITED_API_VERSION)],
+        py_limited_api=True,
+    ),
 ]
 
 setup(

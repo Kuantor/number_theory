@@ -54,3 +54,46 @@ jobs:
         with:
           name: wheel-${{ matrix.os }}-py${{ matrix.python-version }}
           path: dist/*.whl
+
+  # Prove the single stable-ABI (abi3) wheel works across Python versions (#23):
+  # build it once, then install that exact wheel on 3.11-3.14 and run the tests.
+  abi3-build:
+    name: abi3 · build one wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build the abi3 wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: abi3-wheel
+          path: dist/*.whl
+
+  abi3-compat:
+    name: abi3 · runs on py${{ matrix.python-version }}
+    needs: abi3-build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: abi3-wheel
+          path: dist
+      - name: Install the ONE abi3 wheel and run the tests
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip pytest
+          python -m pip install dist/*.whl
+          cd tests && python -m pytest -q
