@@ -17,11 +17,13 @@ The prebuilt release wheel targets:
 
 | | |
 | --- | --- |
-| Operating system | Windows, 64-bit |
-| Python | CPython **3.14**, 64-bit |
+| Operating system | Windows, macOS, or Linux (64-bit) — one wheel each |
+| Python | CPython **3.11 or newer** |
 
-On any other OS or Python version, install by **building from source** (see
-[1.3](#13-build-from-source)) — you'll need a C compiler.
+The wheels use Python's stable ABI (`abi3`), so a single wheel per OS works on
+CPython 3.11 and up — no per-version wheels. On an unsupported platform, install
+by **building from source** (see [1.3](#13-build-from-source)) — you'll need a C
+compiler.
 
 ---
 
@@ -36,20 +38,20 @@ On any other OS or Python version, install by **building from source** (see
 ### 2.1 From the GitHub Release (recommended)
 
 ```powershell
-pip install https://github.com/Kuantor/number_theory/releases/download/v0.1.0/number_theory-0.1.0-cp314-cp314-win_amd64.whl
+pip install https://github.com/Kuantor/number_theory/releases/download/v0.2.0/number_theory-0.2.0-cp311-abi3-win_amd64.whl
 ```
 
-Or download the `.whl` from the
+Or download the `.whl` for your OS from the
 [releases page](https://github.com/Kuantor/number_theory/releases) and install the file:
 
 ```powershell
-pip install .\number_theory-0.1.0-cp314-cp314-win_amd64.whl
+pip install .\number_theory-0.2.0-cp311-abi3-win_amd64.whl
 ```
 
 ### 2.2 Verify the install
 
 ```powershell
-number-theory --version        # -> number_theory 0.1.0
+number-theory --version        # -> number_theory 0.2.0
 python -c "import number_theory as nt; print(nt.gcd(12, 18))"   # -> 6
 ```
 
@@ -184,8 +186,9 @@ If you're working inside a **virtual environment**, activating it
 step needed.
 
 **`pip` says the wheel is "not a supported wheel on this platform"**
-The release wheel is for Windows x64 + Python 3.14 only. On a different platform
-or Python version, build from source (see [2.3](#23-build-from-source)).
+Each release wheel is 64-bit and for one OS (Windows / macOS / Linux). Grab the
+one that matches your OS — it works on any CPython 3.11+. If your platform isn't
+covered, build from source (see [2.3](#23-build-from-source)).
 
 ---
 

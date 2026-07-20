@@ -6,19 +6,21 @@ Lightweight, **dependency-free** Python number-theory library whose core is
 compiled to a **source-less binary** (Cython → `.pyd` / `.so`), so it can be
 shipped and used without distributing the algorithm source.
 
-> **Status: MVP (v0.1.0).** Only GCD / LCM (Euclidean algorithm) is implemented
-> so far. See the [roadmap board](https://github.com/orgs/Kuantor/projects/10)
-> for what's next (primality, factorization, totient, modular arithmetic, …).
+> **Status: v0.2.0.** GCD / LCM (Euclidean algorithm) implemented, now shipped as
+> stable-ABI (`abi3`) wheels — one wheel per OS runs on **CPython 3.11+**. See the
+> [roadmap board](https://github.com/orgs/Kuantor/projects/10) for what's next
+> (primality, factorization, totient, modular arithmetic, …).
 
 📖 **New here? Read the [User Guide](docs/USER_GUIDE.md)** — install, CLI + Python
 usage, and troubleshooting.
 
 ## Install
 
-From a built wheel (contains the compiled binary only — no source for the core):
+From a released wheel (compiled binary only — no source for the core). The wheels
+use Python's stable ABI, so one `abi3` wheel per OS works on **CPython 3.11+**:
 
 ```bash
-pip install number_theory-0.1.0-cp314-cp314-win_amd64.whl
+pip install number_theory-0.2.0-cp311-abi3-win_amd64.whl
 ```
 
 Or build the wheel yourself (requires a C compiler — MSVC on Windows, gcc/clang elsewhere):
